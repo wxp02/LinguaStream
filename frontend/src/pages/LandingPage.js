@@ -2,10 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-  let navigate = useNavigate(); // Get the navigate function from the hook
+  let navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate("/home"); // Navigate to the HomePage
+    navigate("/home");
   };
 
   return (
