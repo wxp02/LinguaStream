@@ -13,10 +13,16 @@ export default function LandingPage() {
       <header className="w-full px-10 py-5 flex justify-between items-center">
         <div className="text-lg font-semibold">LinguaStream</div>
         <div>
-          <button className="mr-4 bg-transparent hover:bg-gray-700 text-white py-2 px-4 rounded">
+          <button
+            onClick={() => navigate("/signup")}
+            className="mr-4 bg-transparent hover:bg-gray-700 text-white py-2 px-4 rounded"
+          >
             Sign up
           </button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => navigate("/login")}
+          >
             Log in
           </button>
         </div>
