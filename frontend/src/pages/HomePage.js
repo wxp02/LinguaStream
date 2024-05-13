@@ -10,6 +10,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 
 export default function HomePage() {
@@ -32,25 +33,33 @@ export default function HomePage() {
           left="4"
         />
         <Sidebar isOpen={isOpen} onClose={onClose} />
-        <Heading as="h1" size="2xl" color="white" mb="8">
-          Insert YouTube Link To Translate Audio
-        </Heading>
-        <Box
-          width="full"
-          maxW="2xl"
-          p="8"
-          bg="white"
-          borderRadius="lg"
-          boxShadow="xl"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         >
-          <Text fontSize="lg" mb="4">
+          <Box className="justify-center text-center">
+            <Heading as="h1" size="2xl" color="white" mb="4">
+              Welcome back Andrew!
+            </Heading>
+            <Text fontSize="xl" color="white" className="justify-center">
+              Insert YouTube Link To Translate Audio
+            </Text>
+          </Box>
+        </motion.div>
+        <Box width="full" maxW="2xl" p="8" borderRadius="lg">
+          <Text fontSize="lg" mb="4" color="white">
             YouTube Link
           </Text>
-          <Input placeholder="Type in YouTube Link" mb="4" />
-          <Text fontSize="lg" mb="4">
+          <Input
+            placeholder="Type in YouTube Link"
+            _placeholder={{ opacity: 1, color: "white" }}
+            mb="4"
+          />
+          <Text fontSize="lg" mb="4" color="white">
             Language
           </Text>
-          <Select placeholder="Select Language" mb="8">
+          <Select placeholder="Select Language" color="white" mb="8">
             <option>English</option>
             <option>Chinese</option>
             <option>French</option>
