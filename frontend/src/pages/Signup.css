@@ -47,6 +47,7 @@ input {
   border-radius: 1em;
   padding-inline-start: 1.5em;
   font-family: "Outfit", sans-serif;
+  color: black;
 }
 
 .signup-button {
