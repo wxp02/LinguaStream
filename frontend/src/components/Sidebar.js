@@ -26,12 +26,16 @@ export default function Sidebar({ isOpen, onClose }) {
   const handleLogout = () => {
     navigate("/");
   };
+
+  const returnHome = ()=>{
+    navigate("/home");
+  };
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader sx={{ fontSize: "24px" }}>LinguaStream</DrawerHeader>
+        <DrawerHeader sx={{ fontSize: "24px" }} onClick = {returnHome} style={{ cursor: 'pointer' }}>LinguaStream</DrawerHeader>
         <DrawerBody>
           <List spacing={5}>
             <ListItem display="flex" alignItems="center">
