@@ -2,6 +2,7 @@ import React from "react";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 import google from "../assets/google.png";
+
 export default function Signup() {
   return (
     <div className="root">
@@ -20,11 +21,11 @@ export default function Signup() {
           </form>
         </div>
         <div className="other-side">
-          <button className="signup-button">Sign Up</button>
+          <button className="signup-button">Sign up</button>
           <p>
             Already have an account?{" "}
             <Link className="login-sign" to="/login">
-              Log in
+              Login
             </Link>
           </p>
           <p>Or</p>

@@ -48,13 +48,14 @@ export default function HomePage() {
           </Box>
         </motion.div>
         <Box width="full" maxW="2xl" p="8" borderRadius="lg">
-          <Text fontSize="lg" mb="4" color="white">
+          <Text fontSize="lg" color="white">
             YouTube Link
           </Text>
           <Input
             placeholder="Type in YouTube Link"
-            _placeholder={{ opacity: 1, color: "white" }}
+            _placeholder={{ opacity: 1, color: "white", fontFamily: "Poppins" }}
             mb="4"
+            style={{ color: "white", fontFamily: "Poppins" }}
           />
           <Text fontSize="lg" mb="4" color="white">
             Language
