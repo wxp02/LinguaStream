@@ -10,6 +10,7 @@ import {
   InputGroup,
   IconButton,
   InputLeftElement,
+  Icon,
   Flex
 } from "@chakra-ui/react";
 import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
@@ -44,23 +45,18 @@ export default function HistoryPage() {
             <Heading as="h1" size="xl" color="white" mb="4">
               History Page
             </Heading>
-            <Text fontSize="xl" color="white" mb="4">
+            <Text fontSize="xl" color="white" mb="5">
               View your translation history
             </Text>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"  // Makes the icon non-interactive
-                paddingLeft="15px"
-                children={<SearchIcon color="gray.300" />}  // Icon color
-              />
-              <Input
-                placeholder="Search History..."
-                _placeholder={{ opacity: 1, color: "gray.300" }}
-                mb="4"
-                mx="auto"
-                width="90%"
-              />
-            </InputGroup>
+            <Icon as={SearchIcon} color="gray.300" marginRight="2" />
+            <Input
+              placeholder="Search History..."
+              _placeholder={{ opacity: 1, color: "gray.300" }}
+              mb="4"
+              mx="auto"
+              width="90%"
+            />
+            
           </Box>
         </motion.div>
         <Box className="justify-center text-center">
