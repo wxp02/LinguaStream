@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Text } from "@chakra-ui/react";
 
 export default function LandingPage() {
   let navigate = useNavigate();
@@ -13,18 +14,22 @@ export default function LandingPage() {
       <header className="w-full px-10 py-5 flex justify-between items-center">
         <div className="text-lg font-semibold">LinguaStream</div>
         <div>
-          <button
+          <Button
             onClick={() => navigate("/signup")}
-            className="mr-4 bg-transparent hover:bg-gray-700 text-white py-2 px-4 rounded"
+            colorScheme="white"
+            size="md"
+            variant="ghost"
+            mr={4}
           >
-            Sign up
-          </button>
-          <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            <Text fontWeight="normal">Sign up</Text>
+          </Button>
+          <Button
             onClick={() => navigate("/login")}
+            colorScheme="green"
+            size="md"
           >
-            Log in
-          </button>
+            <Text fontWeight="normal">Login</Text>
+          </Button>
         </div>
       </header>
       <main className="flex flex-col items-center justify-center flex-grow mt-[-10vh]">

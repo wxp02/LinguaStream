@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import google from "../assets/google.png";
+
 export default function Login() {
   return (
     <div className="root">
@@ -14,7 +15,7 @@ export default function Login() {
             <input type="password" placeholder="Password" />
             <br />
           </form>
-          <button className="signup-button">Sign Up</button>
+          <button className="signup-button">Login</button>
           <div className="other">
             <p className="signup-switch">
               Need to create an account?{" "}
