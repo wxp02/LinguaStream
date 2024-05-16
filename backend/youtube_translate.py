@@ -1,7 +1,7 @@
 import os
 from pydub import AudioSegment
+from dotenv import load_dotenv
 from youtube_transcript_api import YouTubeTranscriptApi
-from google.cloud import translate_v2
 from google.cloud import texttospeech
 import json
 from pydub.playback import play
@@ -10,6 +10,9 @@ from google.api_core.exceptions import RetryError, ServerError
 
 # before using this code, make sure to run
 # `export GOOGLE_APPLICATION_CREDENTIALS=your_credentials.json`
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Access environment variables
 project_id = os.getenv('PROJECT_ID')
@@ -368,10 +371,11 @@ if __name__ == "__main__":
     print(translated_transcript)
 
     joined_transcripts = join_transcripts(video_url, 'ms')
+    print(joined_transcripts)
 
-    text_to_speech(joined_transcripts, 'ms', "NEUTRAL")
-    merge_audio_files('final_output.mp3')
+    # text_to_speech(joined_transcripts, 'ms', "NEUTRAL")
+    # merge_audio_files('final_output.mp3')
 
-    adjust_audio_speed("mp3/final_output.mp3", translated_transcript[-1]['start'])
+    # adjust_audio_speed("mp3/final_output.mp3", translated_transcript[-1]['start'])
 
     # text_to_speech_and_align(modified_transcript, 'en', 'output/final_audio.mp3')
