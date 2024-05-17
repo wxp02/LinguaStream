@@ -21,6 +21,11 @@ export default function HomePage() {
   const [youtubeLink, setYoutubeLink] = useState("");
   const [language, setLanguage] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted:", youtubeLink, language);
+  }
+
   const handleTranslate = async () => {
     setLoading(true);
     try {
@@ -78,6 +83,7 @@ export default function HomePage() {
             <Text fontSize="lg" color="white">
               YouTube Link
             </Text>
+            
             <Input
               placeholder="Type in YouTube Link"
               value={youtubeLink}
@@ -113,6 +119,7 @@ export default function HomePage() {
             >
               Translate
             </Button>
+            
           </Box>
         ) : (
           <Center w="full" h="full" position="absolute" top="0" left="0">
