@@ -7,21 +7,16 @@ import json
 from pydub.playback import play
 import time
 from google.api_core.exceptions import RetryError, ServerError
+import vertexai
+from vertexai.preview.generative_models import GenerativeModel, GenerationConfig, HarmCategory, HarmBlockThreshold, Part
+from googleapiclient.discovery import build
+import re
 
 # before using this code, make sure to run
 # `export GOOGLE_APPLICATION_CREDENTIALS=your_credentials.json`
 
 # Load environment variables from .env file
 load_dotenv()
-
-# Access environment variables
-project_id = os.getenv('PROJECT_ID')
-location = os.getenv('LOCATION')
-google_credentials = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-
-# Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = google_credentials
-
 
 def extract_video_id(video_id_or_url):
     # a youtube video id is 11 characters long
@@ -352,6 +347,77 @@ def adjust_audio_speed(file_path, target_duration_seconds):
 
     return output_path
 
+# Access environment variables
+project_id = os.getenv('PROJECT_ID')
+location = os.getenv('LOCATION')
+google_credentials = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+# Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = google_credentials
+# you have to call `export GOOGLE_APPLICATION_CREDENTIALS=your_credentials.json` in the terminal
+
+vertexai.init(project = project_id, location = location)
+
+generation_config = GenerationConfig(
+    temperature = 0.1,          # higher = more creative (default 0.0)
+    top_p = 0.5,                # higher = more random responses, response drawn from more possible next tokens (default 0.95)
+    top_k = 10,                 # higher = more random responses, sample from more possible next tokens (default 40)
+    candidate_count = 1,
+    max_output_tokens = 1024
+)
+
+safety_settings = {
+    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+}
+
+safety_settings = {
+    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+}
+
+def insert_punctuation(text):
+    prompt = (f"""
+              Given the text: "{text}", 
+              I want you to insert the appropriate punctuation marks and capitalization to make it a proper sentence.
+              """)
+
+    model = GenerativeModel("gemini-1.0-pro-vision")
+
+    prompt_part = Part.from_text(prompt)
+
+    responses = model.generate_content(
+        contents = prompt_part,
+        generation_config = generation_config,
+        safety_settings = safety_settings,
+        stream = False
+    )
+
+    return responses.text
+
+def produce_title(youtube_url):
+    # Assuming GOOGLE_APPLICATION_CREDENTIALS is set
+    youtube = build('youtube', 'v3')
+
+    # Extract the video ID from the URL
+    video_id_match = re.search(r'v=([^&]+)', youtube_url)
+    video_id = video_id_match.group(1) if video_id_match else None
+
+    if not video_id:
+        return "Invalid URL or video ID not found."
+
+    # Call the YouTube API to get the video details
+    request = youtube.videos().list(part="snippet", id=video_id)
+    response = request.execute()
+
+    # Extract the title from the response
+    return response['items'][0]['snippet']['title'] if response['items'] else "Video not found."
+
+
 if __name__ == "__main__":
     # english
     # video_url = "https://www.youtube.com/watch?v=oz9cEqFynHU"
@@ -367,11 +433,14 @@ if __name__ == "__main__":
     # transcript_list = get_transcript_list(video_url)
     # print(transcript_list)
 
-    translated_transcript = translate_transcript(video_url, 'ms')
-    print(translated_transcript)
+    # translated_transcript = translate_transcript(video_url, 'en')
+    # print(translated_transcript)
 
-    joined_transcripts = join_transcripts(video_url, 'ms')
-    print(joined_transcripts)
+    # joined_transcripts = join_transcripts(video_url, 'en')
+    # print(joined_transcripts)
+
+    # script = insert_punctuation(joined_transcripts)
+    # print(script)
 
     # text_to_speech(joined_transcripts, 'ms', "NEUTRAL")
     # merge_audio_files('final_output.mp3')
@@ -379,3 +448,5 @@ if __name__ == "__main__":
     # adjust_audio_speed("mp3/final_output.mp3", translated_transcript[-1]['start'])
 
     # text_to_speech_and_align(modified_transcript, 'en', 'output/final_audio.mp3')
+
+    print(produce_title(video_url))
