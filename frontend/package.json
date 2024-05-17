@@ -2,6 +2,7 @@
   "name": "linguastream",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://loaclhost:5000",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",

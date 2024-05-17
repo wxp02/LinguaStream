@@ -4,10 +4,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-@app.route('/translate', methods=['POST', 'OPTIONS'])
+@app.route('/translate', methods=['POST', 'GET'])
 def translate_video():
     if request.is_json:
         req_data = request.get_json()
+        print(req_data)
         youtube_link = req_data['youtube_link']
         language = req_data['language']
 
