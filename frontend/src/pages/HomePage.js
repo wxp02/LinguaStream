@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import CustomHamburgerIcon from "../components/CustomHamburgerIcon";
 import HomePageInputs from "../components/HomePageInputs";
+import axios from "axios";
 
 export default function HomePage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,24 +46,41 @@ export default function HomePage() {
     }
 
     setLoading(true);
-    setTimeout(() => {
+    try {
       const videoId = getYouTubeVideoId(youtubeLink);
       if (!videoId) {
         setError("Invalid YouTube link. Please check and try again.");
         setLoading(false);
         return;
       }
-      const thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
-      const title = "Dynamic Video Title"; // Placeholder, fetch this dynamically
-
-      setVideoDetails({
-        thumbnail,
-        title,
-        language,
-        celebrityVoice: language === "English" ? celebrityVoice : "",
+      const response = await axios.post("http://127.0.0.1:5000/translate", {
+        youtube_link: youtubeLink,
+        language: language,
+        celebrity_voice: celebrityVoice,
       });
+      console.log(response); // For testing in frontend
+
+      if (response.status === 200) {
+        const thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+        const title = "Dynamic Video Title"; // Ideally fetch this dynamically or from the response if your backend provides it
+
+        setVideoDetails({
+          thumbnail,
+          title,
+          language,
+          celebrityVoice: language === "English" ? celebrityVoice : "",
+        });
+      } else {
+        setError("Failed to translate. Please try again.");
+      }
+    } catch (error) {
+      setError(
+        "An error occurred while trying to translate. Please try again."
+      );
+      console.error("Error translating video:", error);
+    } finally {
       setLoading(false);
-    }, 2000);
+    }
   };
 
   const handleReset = () => {
