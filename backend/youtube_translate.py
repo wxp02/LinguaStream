@@ -352,7 +352,7 @@ def adjust_audio_speed(file_path, target_duration_seconds):
 
     return output_path
 
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     # english
     # video_url = "https://www.youtube.com/watch?v=oz9cEqFynHU"
 
@@ -360,7 +360,7 @@ if __name__ == "__main__":
     # video_url = "https://www.youtube.com/watch?v=45JmB3PoqfQ"
 
     # Dijsktra's algorithm
-    video_url = "https://www.youtube.com/watch?v=_lHSawdgXpI"
+    #video_url = "https://www.youtube.com/watch?v=_lHSawdgXpI"
 
     # different languages: 'en', 'fr', 'fil', 'id', 'ja', 'ms', 'zh-Hans'
 
@@ -379,3 +379,4 @@ if __name__ == "__main__":
     # adjust_audio_speed("mp3/final_output.mp3", translated_transcript[-1]['start'])
 
     # text_to_speech_and_align(modified_transcript, 'en', 'output/final_audio.mp3')
+    '''
