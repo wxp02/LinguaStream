@@ -10,7 +10,7 @@ module.exports = {
         lightgrey: "#8E8E8E",
       },
       backgroundImage: {
-        "my-image": "url(/public/home-background.jpg)",
+        "my-image": "url(/public/green-background.avif)",
       },
     },
   },

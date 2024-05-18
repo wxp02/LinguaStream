@@ -48,12 +48,13 @@ export default function HistoryPage() {
             <Text fontSize="xl" color="white" mb="5">
               View your translation history
             </Text>
-            <Icon as={SearchIcon} color="gray.300" marginRight="2" />
+            <Icon as={SearchIcon} color="gray.500" marginRight="2" />
             <Input
               placeholder="Search History..."
-              _placeholder={{ opacity: 1, color: "gray.300" }}
+              _placeholder={{ opacity: 1, color: "black" }}
               mb="4"
               mx="auto"
+              borderColor="grey"
               width="90%"
             />
             
@@ -61,11 +62,11 @@ export default function HistoryPage() {
         </motion.div>
         <Box className="justify-center text-center">
           <Flex justifyContent="flex-end" align="center">
-            <Text fontSize="lg" mb="4" color="white" mr="40">
+            <Text fontSize="lg" mb="4" color="grey" mr="40">
               Link
             </Text>
 
-            <Text fontSize="lg" mb="4" color="white" mr="1">
+            <Text fontSize="lg" mb="4" color="grey" mr="1">
               Language translated to
             </Text>
           </Flex>
