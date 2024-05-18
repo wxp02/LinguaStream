@@ -97,6 +97,7 @@ export default function HomePageVideo({ videoDetails, handleReset }) {
             display="flex"
             flex="1"
             flexDirection="column"
+            width="100%"
           >
             <VStack spacing={4} flex="1" bg="gray.100" p={3} borderRadius="md">
               <Flex alignItems="center">
@@ -110,6 +111,7 @@ export default function HomePageVideo({ videoDetails, handleReset }) {
                 value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse..."
                 readOnly
                 height="100%"
+                resize={'none'}
               />
             </VStack>
             
