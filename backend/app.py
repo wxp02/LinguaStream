@@ -40,29 +40,33 @@ def load_user(user_id):
 def login():
     if request.is_json:
         req_data = request.get_json()
+        if req_data['email'] == "" or req_data['password'] == "":
+            return {'login': 'fail', 'message': 'Please enter the necessary login data.'}
         user = User.query.filter_by(email=req_data['email']).first()
         if user is None:
             return {'login': 'fail',
-                    'message': 'The user does not exist'}
+                    'message': 'There is no account with that email.'}
         else:
             if check_password_hash(user.password, req_data['password']):
                 login_user(user)
                 return {'login': 'pass'}
             else:
                 return {'login': 'fail', 
-                        'message': 'wrong password'}
+                        'message': 'Incorrect email address or password.'}
     #figure out what else to return when a user is successfully signed up
-    return {'login': 'fail', 'message': 'Please enter the necessary login data'}
+    return {'login': 'fail', 'message': 'Please enter the necessary login data.'}
 
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.is_json:
         req_data = request.get_json()
+        if req_data['email'] == "" or req_data['password'] == "" or req_data['name']:
+            return {'login': 'fail', 'message': 'Please enter the necessary login data.'}
         user = User.query.filter_by(email=req_data['email']).first()
         if user:
             return {'signup': 'fail',
-                    'message': 'Email for user already exists'}
+                    'message': 'Email already exists.'}
         else:
             the_user = User(
                 email=req_data['email'],
