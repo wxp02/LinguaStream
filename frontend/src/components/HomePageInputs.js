@@ -41,11 +41,11 @@ export default function HomePageInputs({
         )}
       </Box>
       {/* Enter Youtube link */}
-      <Text fontSize="lg" color="white" textAlign="left">
+      <Text fontSize="lg" color="black" textAlign="left">
         YouTube Link
       </Text>
       <Stack direction="row" align="center" spacing={4} width="full" maxW="2xl">
-        <Icon as={LinkIcon} color="gray.300" w={5} h={5} alignSelf="center" />
+        <Icon as={LinkIcon} color="gray.500" w={5} h={5} alignSelf="center" />
 
         <InputGroup>
           <Input
@@ -54,24 +54,25 @@ export default function HomePageInputs({
             onChange={(e) => setYoutubeLink(e.target.value)}
             _placeholder={{
               opacity: 1,
-              color: "white",
+              color: "black",
               fontFamily: "Poppins",
             }}
             mb="6"
             pl="10px" // Adjust padding left as needed to visually match Select fields
-            style={{ color: "white", fontFamily: "Poppins", width: "100%" }} // Ensure full width usage within the group
+            borderColor="grey"
+            style={{ color: "black", fontFamily: "Poppins", width: "100%" }} // Ensure full width usage within the group
           />
         </InputGroup>
       </Stack>
 
       {/* Select language */}
-      <Text fontSize="lg" color="white" textAlign="left" mb="4">
+      <Text fontSize="lg" color="black" textAlign="left" mb="4">
         Language
       </Text>
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
-          color="gray.300"
+          color="gray.500"
           fontSize="1.7em"
         >
           <Icon as={LiaLanguageSolid} />
@@ -80,9 +81,10 @@ export default function HomePageInputs({
           placeholder="Select Language"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          color="white"
+          color="black"
           mb="6"
           pl="40px" // Add left padding to make room for the icon
+          borderColor="grey"
           _placeholder={{ opacity: 0.6 }} // Style the placeholder as needed
         >
           <option value="English">English</option>
@@ -100,13 +102,13 @@ export default function HomePageInputs({
               offsetY="20px"
             >
               <>
-                <Text fontSize="lg" color="white" textAlign="left" mb="4">
+                <Text fontSize="lg" color="black" textAlign="left" mb="4">
                   Celebrity Voice
                 </Text>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
-                    color="gray.300"
+                    color="yellow.500"
                     fontSize="1.7em"
                   >
                     <Icon as={StarIcon} />
@@ -115,9 +117,10 @@ export default function HomePageInputs({
                     placeholder="No Celebrity Voice"
                     value={celebrityVoice}
                     onChange={(e) => setCelebrityVoice(e.target.value)}
-                    color="white"
+                    color="black"
                     mb="8"
                     pl="40px"
+                    borderColor="grey"
                     _placeholder={{ opacity: 0.6 }}
                   >
                     <option value="Obama">Obama</option>
@@ -131,9 +134,14 @@ export default function HomePageInputs({
       )}
 
       <Button
-        colorScheme="blue"
+       
+        backgroundColor="transparent"
+        border="2px"
+        borderColor="grey"
+        borderRadius="full"
         size="lg"
-        width="full"
+        width="50%"
+        _hover={{ bg: "teal.500", color: "white", borderColor: "transparent" }}
         onClick={handleTranslate}
         rightIcon={<Icon as={CheckIcon} />}
       >
