@@ -68,7 +68,7 @@ def clone_voice(audio_filepath, output_name):
     np.savez(output_path, fine_prompt=codes, coarse_prompt=codes[:2, :], semantic_prompt=semantic_tokens)
     print(f"Cloned voice saved to {output_path}")
 
-def generate_voice(text_prompt, voice_name, output_name):
+def generate_voice(text_prompt, voice_name, output_path, output_name):
     # simple generation
     audio_array = generate_audio(text_prompt, history_prompt=voice_name, text_temp=0.1, waveform_temp=0.1)
 
@@ -96,14 +96,14 @@ def generate_voice(text_prompt, voice_name, output_name):
     # audio_array = codec_decode(x_fine_gen)
 
     # save audio
-    filepath = f'bark_voices/generated_audios/{output_name}.wav' # change this to your desired output path
+    filepath = f'{output_path}/{output_name}.wav' # change this to your desired output path
     write_wav(filepath, SAMPLE_RATE, audio_array)
     print(f"Cloned voice saved to {filepath}")
 
-def generate_longer_voices(text_prompt, voice_name, output_name):
+def generate_longer_voices(text_prompt, voice_name, output_path, output_name):
     sentences = nltk.sent_tokenize(text_prompt)
 
-    # print("Sentences:", sentences)
+    print("Sentences:", sentences)
 
     pieces = []
     for sentence in sentences:
@@ -122,38 +122,37 @@ def generate_longer_voices(text_prompt, voice_name, output_name):
 
     concatenated_audio = np.concatenate(pieces)
 
-    filepath = f'bark_voices/generated_audios/{output_name}.wav'
+    filepath = f'{output_path}/{output_name}.wav'
     write_wav(filepath, SAMPLE_RATE, concatenated_audio)
     print(f"Cloned voice saved to {filepath}")
 
 
-if __name__ == "__main__":
-    ensure_nltk_resources()
-    # english
-    # video_url = "https://www.youtube.com/watch?v=oz9cEqFynHU"
+# if __name__ == "__main__":
+#     ensure_nltk_resources()
+#     # english
+#     # video_url = "https://www.youtube.com/watch?v=oz9cEqFynHU"
 
-    # hindi
-    # video_url = "https://www.youtube.com/watch?v=45JmB3PoqfQ"
+#     # hindi
+#     # video_url = "https://www.youtube.com/watch?v=45JmB3PoqfQ"
 
-    # Dijsktra's algorithm (english)
-    # video_url = "https://www.youtube.com/watch?v=_lHSawdgXpI"
+#     # Dijsktra's algorithm (english)
+#     # video_url = "https://www.youtube.com/watch?v=_lHSawdgXpI"
 
-    # translated_transcript = translate_transcript(video_url, 'en')
-    # print(translated_transcript)
+#     # translated_transcript = translate_transcript(video_url, 'en')
+#     # print(translated_transcript)
 
-    # joined_transcripts = join_transcripts(video_url, 'en')
-    # print(joined_transcripts)
+#     # joined_transcripts = join_transcripts(video_url, 'en')
+#     # print(joined_transcripts)
 
-    # Usage example:
-    # audio_path = 'bark_voices/speaker/gordonramsey.mp3'  # Input audio file
-    # voice_name = 'gordonramsey'  # Output voice name
-    # clone_voice(audio_path, voice_name)
+#     # Usage example:
+#     # audio_path = 'bark_voices/speaker/gordonramsey.mp3'  # Input audio file
+#     # voice_name = 'gordonramsey'  # Output voice name
+#     # clone_voice(audio_path, voice_name)
 
-    text = '''Today I will teach you how to run Dijkstra's algorithm on a weighted directed graph, Dijkstra's algorithm tells you the shortest distance from a node to every other node in the graph, this is different from prims and kruskal which results in minimum spanning trees'''
-    script = insert_punctuation(text)
-    print(script)
-    voice_model = "bark_voices/voice_models/gordonramsey.npz"
-    output_name = 'gordonramsey'
-    generate_longer_voices(script, voice_model, output_name)
-
-    
+#     text = '''Today I will teach you how to run Dijkstra's algorithm on a weighted directed graph, Dijkstra's algorithm tells you the shortest distance from a node to every other node in the graph, this is different from prims and kruskal which results in minimum spanning trees'''
+#     script = insert_punctuation(text)
+#     print(script)
+#     voice_model = "bark_voices/voice_models/gordonramsey.npz"
+#     output_path = 'bark_voices/generated_audios'
+#     output_name = 'gordonramsey'
+#     generate_longer_voices(script, voice_model, output_path, output_name)
