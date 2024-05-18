@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, useDisclosure, Spinner, Center } from "@chakra-ui/react";
+import { Box, useDisclosure, Spinner, Center, VStack, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import CustomHamburgerIcon from "../components/CustomHamburgerIcon";
@@ -93,7 +93,9 @@ export default function HomePage() {
         >
           <Box className="justify-center text-center">
             {loading ? (
-              <Center>
+              <Center height="100vh"> {/* Adjust height as needed to center vertically in the view */}
+              <VStack spacing={3}> {/* Vertical stack with spacing between items */}
+                <Text fontSize="xl" color="gray.200">Translating...</Text> {/* Text component for the label */}
                 <Spinner
                   size="xl"
                   thickness="4px"
@@ -101,7 +103,8 @@ export default function HomePage() {
                   emptyColor="gray.200"
                   color="blue.500"
                 />
-              </Center>
+              </VStack>
+            </Center>
             ) : videoDetails ? (
               <HomePageVideo
                 videoDetails={videoDetails}
