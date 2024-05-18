@@ -54,7 +54,7 @@ export default function HomePageInputs({
             onChange={(e) => setYoutubeLink(e.target.value)}
             _placeholder={{
               opacity: 1,
-              color: "grey",
+              color: "black",
               fontFamily: "Poppins",
             }}
             mb="6"
@@ -137,7 +137,7 @@ export default function HomePageInputs({
        
         backgroundColor="transparent"
         border="2px"
-        borderColor="white"
+        borderColor="grey"
         borderRadius="full"
         size="lg"
         width="50%"

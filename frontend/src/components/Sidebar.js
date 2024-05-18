@@ -93,13 +93,13 @@ export default function Sidebar({ isOpen, onClose }) {
           bottom="0" 
           left="0" 
           right="0" p="5" 
-          bgGradient="linear(to-t, green.400, green.50)" 
+          bgGradient="linear(to-t, green.300, white)" 
           
           boxShadow="xl" 
           >
           <Flex alignItems="center" justifyContent="flex-start">
             <Avatar name="Andrew" src="https://bit.ly/broken-link" />
-            <Text ml="3" color="white" >Andrew</Text>
+            <Text ml="3" color="black" >Andrew</Text>
           </Flex>
         </Box>
         </motion.div>
