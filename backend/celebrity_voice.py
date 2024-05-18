@@ -6,7 +6,7 @@ from hubert.hubert_manager import HuBERTManager
 from hubert.pre_kmeans_hubert import CustomHubert
 from hubert.customtokenizer import CustomTokenizer
 import numpy as np
-from youtube_translate import translate_transcript, join_transcripts, insert_punctuation
+from youtube_translate import translate_transcript, join_transcripts, insert_punctuation, text_to_speech, merge_audio_files
 from scipy.io.wavfile import write as write_wav
 import re
 
@@ -68,63 +68,35 @@ def clone_voice(audio_filepath, output_name):
     np.savez(output_path, fine_prompt=codes, coarse_prompt=codes[:2, :], semantic_prompt=semantic_tokens)
     print(f"Cloned voice saved to {output_path}")
 
-def generate_voice(text_prompt, voice_name, output_path, output_name):
-    # simple generation
-    audio_array = generate_audio(text_prompt, history_prompt=voice_name, text_temp=0.1, waveform_temp=0.1)
-
-    # generation with more control
-    # x_semantic = generate_text_semantic(
-    #     text_prompt,
-    #     history_prompt=voice_name,
-    #     temp=0.7,
-    #     top_k=50,
-    #     top_p=0.95,
-    # )
-
-    # x_coarse_gen = generate_coarse(
-    #     x_semantic,
-    #     history_prompt=voice_name,
-    #     temp=0.7,
-    #     top_k=50,
-    #     top_p=0.95,
-    # )
-    # x_fine_gen = generate_fine(
-    #     x_coarse_gen,
-    #     history_prompt=voice_name,
-    #     temp=0.5,
-    # )
-    # audio_array = codec_decode(x_fine_gen)
-
-    # save audio
-    filepath = f'{output_path}/{output_name}.wav' # change this to your desired output path
-    write_wav(filepath, SAMPLE_RATE, audio_array)
-    print(f"Cloned voice saved to {filepath}")
-
 def generate_longer_voices(text_prompt, voice_name, output_path, output_name):
-    sentences = nltk.sent_tokenize(text_prompt)
+    if voice_name in ['en', 'fr', 'zh-Hans']:
+        text_to_speech(text_prompt, voice_name, "NEUTRAL")
+        merge_audio_files(output_path, f'{output_name}.mp3')
+    else:
+        sentences = nltk.sent_tokenize(text_prompt)
 
-    print("Sentences:", sentences)
+        print("Sentences:", sentences)
 
-    pieces = []
-    for sentence in sentences:
-        audio_array = generate_audio(sentence, history_prompt=voice_name, text_temp=0.1, waveform_temp=0.1)
-        if audio_array is None or len(audio_array) == 0:
-            print("Error: Audio generation failed for sentence:", sentence)
-            continue  # Skip this sentence or handle error appropriately
-        pieces.append(audio_array)
+        pieces = []
+        for sentence in sentences:
+            audio_array = generate_audio(sentence, history_prompt=voice_name, text_temp=0.1, waveform_temp=0.1)
+            if audio_array is None or len(audio_array) == 0:
+                print("Error: Audio generation failed for sentence:", sentence)
+                continue  # Skip this sentence or handle error appropriately
+            pieces.append(audio_array)
 
-        filepath = f'bark_voices/generated_audios/curr.wav' # change this to your desired output path
-        write_wav(filepath, SAMPLE_RATE, audio_array)
+            filepath = f'bark_voices/generated_audios/curr.wav' # change this to your desired output path
+            write_wav(filepath, SAMPLE_RATE, audio_array)
 
-    if not pieces:
-        print("No audio pieces were generated.")
-        return
+        if not pieces:
+            print("No audio pieces were generated.")
+            return
 
-    concatenated_audio = np.concatenate(pieces)
+        concatenated_audio = np.concatenate(pieces)
 
-    filepath = f'{output_path}/{output_name}.wav'
-    write_wav(filepath, SAMPLE_RATE, concatenated_audio)
-    print(f"Cloned voice saved to {filepath}")
+        filepath = f'{output_path}/{output_name}.wav'
+        write_wav(filepath, SAMPLE_RATE, concatenated_audio)
+        print(f"Cloned voice saved to {filepath}")
 
 
 # if __name__ == "__main__":

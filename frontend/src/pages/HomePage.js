@@ -1,21 +1,11 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Box,
-  Heading,
-  Text,
-  useDisclosure,
-  Image,
-  VStack,
-  Spinner,
-  Center,
-  Alert,
-  AlertIcon,
-} from "@chakra-ui/react";
+import { Box, useDisclosure, Spinner, Center } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import CustomHamburgerIcon from "../components/CustomHamburgerIcon";
 import HomePageInputs from "../components/HomePageInputs";
+import HomePageVideo from "../components/HomePageVideo";
+// import Chatbot from "../components/Chatbot";
 import axios from "axios";
 
 export default function HomePage() {
@@ -101,18 +91,7 @@ export default function HomePage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <Box className="mb-4">
-            <Heading fontSize="3xl" color="white">
-              Insert YouTube Link To Translate Audio
-            </Heading>
-          </Box>
           <Box className="justify-center text-center">
-            {error && (
-              <Alert status="error" mb="4">
-                <AlertIcon />
-                {error}
-              </Alert>
-            )}
             {loading ? (
               <Center>
                 <Spinner
@@ -124,32 +103,13 @@ export default function HomePage() {
                 />
               </Center>
             ) : videoDetails ? (
-              <VStack spacing={4}>
-                <Image
-                  src={videoDetails.thumbnail}
-                  alt="Video Thumbnail"
-                  boxSize="300px"
-                  objectFit="cover"
-                  borderRadius="lg"
-                />
-                <Text fontSize="lg" color="white">
-                  Title: {videoDetails.title}
-                </Text>
-                <Text fontSize="lg" color="white">
-                  Language: {videoDetails.language}
-                </Text>
-                {videoDetails.language === "English" &&
-                  videoDetails.celebrityVoice && (
-                    <Text fontSize="lg" color="white">
-                      Celebrity Voice: {videoDetails.celebrityVoice}
-                    </Text>
-                  )}
-                <Button colorScheme="blue" onClick={handleReset}>
-                  Back
-                </Button>
-              </VStack>
+              <HomePageVideo
+                videoDetails={videoDetails}
+                handleReset={handleReset}
+              />
             ) : (
               <HomePageInputs
+                error={error}
                 youtubeLink={youtubeLink}
                 setYoutubeLink={setYoutubeLink}
                 language={language}
@@ -162,6 +122,7 @@ export default function HomePage() {
           </Box>
         </motion.div>
       </Box>
+      {/* <Chatbot /> */}
     </div>
   );
 }
