@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
-import google from "../assets/google.png";
+import cross from "../assets/cross.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
+  const [error, setError] = useState("");
+  const [showError, setShow] = useState("");
   let navigate = useNavigate();
 
   const loginer = async () => {
@@ -25,8 +26,8 @@ export default function Login() {
       if(data.login === "pass"){
         navigate("/home");
       }else{
-        alert("login error");
-        console.log("login error");
+        setError(data.message);
+        setShow("True");
         // error with login display something on the page
       }
     } catch (error) {
@@ -34,11 +35,24 @@ export default function Login() {
     }
   };
 
+  function errorShower(){
+    if(showError==="True"){
+      return(
+      <div className="error-holder">
+      <p>{error}</p>
+      <img onClick={()=>{setShow("False")}} src={cross} alt=""/>
+    </div>);
+    }
+  }
+
   return (
     <div className="root">
+      {errorShower()}
+      
       <div className="holding">
         <div className="signup-form">
-          <h1>Login</h1>
+          <h1><Link to="/">linguastream</Link></h1>
+          <h1 style={{fontWeight: 500, fontSize: "1.3em", marginTop: "1em"}}>Login</h1>
           <form>
             <input value={email}
               onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Email Address" />
@@ -55,11 +69,6 @@ export default function Login() {
                 Sign up
               </Link>
             </p>
-            <p>Or</p>
-            <button className="google-button">
-              <img src={google} alt="Logo" />
-              Login with Google
-            </button>
           </div>
         </div>
       </div>
