@@ -1,7 +1,17 @@
 import React from "react";
-import { Box, Text, Input, Select, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Input,
+  Select,
+  Button,
+  Heading,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 
 export default function HomePageInputs({
+  error,
   youtubeLink,
   setYoutubeLink,
   language,
@@ -12,6 +22,17 @@ export default function HomePageInputs({
 }) {
   return (
     <Box width="full" maxW="2xl" p="8" borderRadius="lg">
+      <Box className="mb-4">
+        <Heading fontSize="3xl" color="white">
+          Insert YouTube Link To Translate Audio
+        </Heading>
+        {error && (
+          <Alert status="error" mb="4">
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
+      </Box>
       {/* Enter Youtube link */}
       <Text fontSize="lg" color="white" textAlign="left">
         YouTube Link
