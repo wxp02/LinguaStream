@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "linguastream-trial",
+  "private_key_id": "e03aa14ac5aa1046edd3d6d5b908160ef6e08db2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCjcXpGODMgjMMI\n8iDNafXPaTxhdK2uir4Ra4iLk/hz3cybKoS0NgVoH1jN2wnDqs7cV3AH6GyCC8qS\nIC6aNqxFDHR6dz7og644FAAsT5c7mqk7lPGtQ93KV8NxTyGcF+VPjxqs3e3vxr1/\n4hMXcrltDq2oqYPBUg1hmqa3QGrkUQS3EMk9gZ5PaIFXy+QwNlIsNQiDSw3PzQAn\neJPPJClCPu8wMrRojeweB7rhVKs5QKa3Ko3EFrAqSCzPp9KjG/2tm2kkiZR3uqr4\ntDdOCFwbSLsbkDL38daXvL2HZcjA+Od4nIpC/vLhdntg9mMR6/vAsxeZVvh9bH6I\n28Oa0UA5AgMBAAECggEARZ8Ge1fgK3rab3qYT3fV3fqRXmARxbpS+V+pg+9Nk6mE\nyQnlClDCn9ZOgS3PLHqbcE+MqMmwQvsb2H/96fHlEuqZyTr3YJsLANdANZ/Xp2ub\nsAYjpm800EbvOVqAUhn5s5idP8qvWoZ5XTqjcEcNxm9MuP4wYg5+Jbf3UTMO9V8B\nBMNVKalOBFI/li+7DcnHUdzSjVA/B8f+reat90ee8VhOH7z/MKmloP+d3/v8TDlC\nLXa5hS9v0Q1gVTz8aPb8gXSJQcXfGG20Tml+1tPD/CBR48sZROGbyplJIU/bFLAT\nImRPyjm3RqPSdsuhSkNN3Pdw/3GeEgt9A9zUxRjxqwKBgQDZD8d7bTLHWGrGba2w\nEELk5xm/PTlgScix6igf3NIZkB+XhmGwBNPlMF6gbzQMd0dKTnlp+EFhRpNPHpQU\nobnEiSWV3fwBXbIFAT76vtVW0cwl9yyYtrsWPBvlX1CqJPpE+MgobFyccFncFI39\nBdNgVgubAVrXIMYVeHjVpWFN/wKBgQDAw1uSWhOq1i1+deatAscE5eHDJ1UW5Lsl\nZqVK0rp4oXi+N8nYwZqBo1tSoqOa0TNfYfUT0pLf5eRPIEbT+3TC1Dh4WHmaZf87\noekzXiynVtz5nB/hSY4n1lIBinJi2C1i1w/KKIdRUShG0ZTLng6xZSY6eRW3Dgm1\nm+vzEmBhxwKBgQCpIuWC5K0LrnbNFcughJtLeFSUsuVRhUzwbZBEe7HvH2GulZTr\nLmfaj908UEqTaCJR4WI0U7DGVtMUdLRYe0igv2ldJTNn8RV1Vuo3QppEY4gbEUZb\n3Q9dHQtzqNjXK6ckNWLqNL3ZXKZ4mj+lqHNz/rheWSjqtuwC8PPfLlXrCwKBgB1i\n6ufh0ZO+uQrJYJRJkxudDBDbQy6NSjaGcnZ4r7LKMwUUrjHcOfi/daGgZ76nW+ST\no3AVLwzxGCAz9HhGomM9RSqbmlY+bG2j3lBVcAtGw8NN2NJYi1JpavEPMSb+e9TQ\noniYOyDbdX9uXfe4rda/a9eINBZHDpXgIlVZHNZrAoGBALxukCyfrKlRhYtwLA7J\nJmQ6Xe00+K2BTjge9hPbjnfkDAvw8VTgFUbJ14HLk5J7uXNSMHIRCEYwbbNt5462\njeCkUwANTw6HZSHucaZLACCN8xOI0rg8gQVD08gbIadFD4Y8chayUr269HQUQU0q\nplR5mpZPQtMZxNKYVma+q65C\n-----END PRIVATE KEY-----\n",
+  "client_email": "linguastream-trial@linguastream-trial.iam.gserviceaccount.com",
+  "client_id": "101188236252057641950",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/linguastream-trial%40linguastream-trial.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
