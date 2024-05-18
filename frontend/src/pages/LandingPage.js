@@ -1,6 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Text } from "@chakra-ui/react";
+import "./LandingPage.css";
+import avl from "../assets/avltrees.png";
+import dennis from "../assets/ddennis.png";
+import algo from "../assets/dijstras.png";
+import git from "../assets/github.png";
 
 export default function LandingPage() {
   let navigate = useNavigate();
@@ -10,50 +15,90 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="bg-[#2B2B2B] text-white min-h-screen flex flex-col">
-      <header className="w-full px-10 py-5 flex justify-between items-center">
-        <div className="text-lg font-semibold">LinguaStream</div>
-        <div>
+    <div className="rooter">
+      <header>
+        <h1 className="lp-title">linguastream</h1>
+        <div className="lp-header-navs">
+          <p>Demo</p><span>&#8901;</span>
+          <a href="#founders"><p>Founders</p></a>
+        </div>
+        <div className="lp-header-buttons">
           <Button
-            onClick={() => navigate("/signup")}
-            colorScheme="white"
-            size="md"
-            variant="ghost"
-            mr={4}
+          backgroundColor={"#1A4D2E"}
+          color={"white"}
+          _hover={{backgroundColor: "white", color: "#1A4D2E"}}
+          borderRadius={"1em"}
+          marginInlineEnd={"1em"}
+          width={"7em"}
+            onClick={() => navigate("/login")}
           >
-            <Text fontWeight="normal">Sign up</Text>
+            <Text>Login</Text>
           </Button>
           <Button
-            onClick={() => navigate("/login")}
-            colorScheme="green"
-            size="md"
+          borderRadius={"1em"}
+          color={"#1A4D2E"}
+          width={"7em"}
+            onClick={() => navigate("/signup")}
           >
-            <Text fontWeight="normal">Login</Text>
+            <Text>Sign up</Text>
           </Button>
         </div>
       </header>
-      <main className="flex flex-col items-center justify-center flex-grow mt-[-10vh]">
-        <div className="flex flex-row items-center justify-center w-full">
-          <div className="flex flex-col mr-40">
-            <h1 className="text-5xl font-bold mb-4">Not a fan of subtitles?</h1>
-            <p className="mb-8 text-sm text-lightgrey">
-              LinguaStream translates audio from YouTube videos into desired
-              languages and accents
-            </p>
-            <button
-              onClick={handleGetStarted}
-              className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 w-40 rounded-lg"
-            >
-              Get started
-            </button>
-          </div>
-          <img
-            src="./landing-page.png"
-            alt="Translate"
-            style={{ width: "500px", height: "500px" }}
-          />
+      <main className="lp-main">
+      <div>
+        <div><h1 className="nafos">Not a fan of subtitles?</h1></div>
+        <div><p className="lp-main-p-text">With linguastream you can translate YouTube videos to your desired languages, removing the need for subtitles.</p></div>
+        <div>
+        <Button
+          borderRadius={"1em"}
+          color={"#1A4D2E"}
+          width={"8em"}
+            onClick={() => navigate("/signup")}
+            marginBlockStart={"2em"}
+          >
+            <Text>Get started</Text>
+          </Button>
         </div>
+      </div>
+      <div>
+          <img className="lp-top-i i1" src={dennis} alt="Logo" />
+        <img className="lp-top-i i2" src={avl} alt="Logo" />
+        <img className="lp-top-i i3" src={algo} alt="Logo" />
+      </div>
       </main>
+      <div id="founders" className="founders">
+        <h1 className="mtm">Meet the makers....</h1>
+        <div className="founders-list">
+          <div>
+            <img className="my-pic" src={git} alt="Logo" />
+          <p>Xin Huey</p>
+          <p>about her..</p>
+          <p>Github and resume</p>
+          </div>
+          <div>
+            <img className="my-pic" src={git} alt="Logo" />
+          <p>Jeremy Poh</p>
+          <p>about him..</p>
+          <p>Github and resume</p>
+          </div>
+          <div>
+            <img className="my-pic" src={git} alt="Logo" />
+          <p>Yen Zein </p>
+          <p>about him..</p>
+          <p>Github and resume</p>
+          </div>
+          <div>
+            <img className="my-pic" src={git} alt="Logo" />
+          <p>Andrew</p>
+          <p>about him..</p>
+          <p>Github and resume</p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p><span>&#169;</span> yz, xh, wx and aa at hawkhacks 2024</p>
+        <p><a href="#"></a></p>
+      </footer>
     </div>
   );
 }

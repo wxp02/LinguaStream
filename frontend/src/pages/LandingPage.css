@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+.rooter{
+    background-color: #1A4D2E;
+    color: white;
+    height: 100vh;
+}
+
+.lp-title{
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 5%;
+    padding-block: 2%;
+}
+
+.lp-header-navs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    font-weight: 600;
+}
+
+.lp-main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: 10%;
+}
+
+.lp-top-i{
+    width: 60%;
+    border-radius: 3%;
+
+}
+
+.i1{
+    position: relative;
+    left: 10em;
+    top: 2em
+}
+
+.i2{
+    position: relative;
+    left: 3em;
+}
+
+.i3{
+    position: relative;
+    left: 4em;
+    bottom: 1em;
+}
+
+.card{
+    background-color: 'white';
+}
+
+.nafos{
+    font-size: 4em;
+}
+
+.lp-main-p-text{
+    padding: 1em;
+    font-weight: 500;
+}
+
+.founders{
+    padding-top: 5em;
+    height: 70vh;
+    background-color: #1A4D2E;
+    padding-bottom: 10em;
+}
+
+footer{
+    background-color: #1A4D2E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1em;
+    font-weight: 700;
+}
+
+.founders-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline-start: 10%;
+}
+
+.my-pic{
+    width: 50%;
+    border-radius: 50%;
+    margin-bottom: 1em;
+}
+
+.mtm{
+    text-align: center;
+    margin-bottom: 1em;
+}
