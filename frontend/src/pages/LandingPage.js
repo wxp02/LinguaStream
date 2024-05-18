@@ -96,7 +96,7 @@ export default function LandingPage() {
         </div>
       </div>
       <footer>
-        <p><span>&#169;</span> yz, xh, wx and aa @ hawkhacks 2024</p>
+        <p><span>&#169;</span> <a className="footer-name" target="_blank" href="https://www.linkedin.com/in/yenzein/">yz</a>, <a className="footer-name" target="_blank" href="https://www.linkedin.com/in/xhwong/">xh</a>, <a className="footer-name" target="_blank"  href="https://www.linkedin.com/in/jeremy-p-1833291ab/">jp</a> and <a className="footer-name" target="_blank" href="https://www.linkedin.com/in/acarochu/">aa</a> at hawkhacks 2024</p>
         <p><a href="#"></a></p>
       </footer>
     </div>

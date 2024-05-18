@@ -1,20 +1,24 @@
 import React, {useState} from "react";
 import "./Signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import google from "../assets/google.png";
+import cross from "../assets/cross.png";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [confPass, setCPass] = useState("");
+  const [error, setError] = useState("");
+  const [showError, setShow] = useState("");
 
   let navigate = useNavigate();
 
   const signer = async () => {
     if(pass !== confPass){
-      alert("Passwords dont match");
-      console.log("Passwords dont match");
+      //alert("Passwords dont match");
+      //console.log("Passwords dont match");
+      setError("Passwords don't match");
+      setShow("True");
       // add a display render for the passwords not matching
 
     }else{
@@ -35,8 +39,8 @@ export default function Signup() {
         if(data.signup === "pass"){
           navigate("/home");
         }else{
-          alert("signup error");
-          console.log("signup error");
+          setError(data.message);
+          setShow("True");
           // error with login display something on the page
         }
       } catch (error) {
@@ -46,11 +50,24 @@ export default function Signup() {
     
   };
 
+  function errorShower(){
+    if(showError==="True"){
+      return(
+      <div className="error-holder">
+      <p>{error}</p>
+      <img onClick={()=>{setShow("False")}} src={cross} alt=""/>
+    </div>);
+    }
+  }
+
   return (
     <div className="root">
+      
+      {errorShower()}
       <div className="holder">
         <div className="signup-form">
-          <h1>Sign Up</h1>
+          <h1><Link to="/">linguastream</Link></h1>
+          <h1 style={{fontWeight: 500, fontSize: "1.3em", marginTop: "0.5em"}}>Sign Up</h1>
           <form>
             <input type="text" value={name}
               onChange={(e) => setName(e.target.value)}  placeholder="Full Name" />
@@ -65,21 +82,15 @@ export default function Signup() {
               onChange={(e) => setCPass(e.target.value)}  placeholder="Confirm Password" />
             <br />
           </form>
-        </div>
-        <div className="other-side">
           <button className="signup-button" onClick={signer}>Sign up</button>
-          <p>
+          <p className="signup-switch">
             Already have an account?{" "}
             <Link className="login-sign" to="/login">
               Login
             </Link>
           </p>
-          <p>Or</p>
-          <button className="google-button">
-            <img src={google} alt="Logo" />
-            Sign up with Google
-          </button>
         </div>
+        
       </div>
     </div>
   );

@@ -104,3 +104,8 @@ footer{
     text-align: center;
     margin-bottom: 1em;
 }
+
+.footer-name:hover{
+    text-decoration: underline 3px;
+
+} 
