@@ -7,10 +7,12 @@ import {
   Select,
   Button,
   Icon,
-  Collapse,
+  Heading,
   SlideFade,
   InputLeftElement,
   InputGroup,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { LinkIcon, CheckIcon, StarIcon } from "@chakra-ui/icons";
 import { LiaLanguageSolid } from "react-icons/lia";
