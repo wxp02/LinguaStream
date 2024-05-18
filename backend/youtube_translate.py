@@ -12,10 +12,6 @@ from vertexai.preview.generative_models import GenerativeModel, GenerationConfig
 from googleapiclient.discovery import build
 import re
 
-# before using this code, make sure to run
-# `export GOOGLE_APPLICATION_CREDENTIALS=your_credentials.json`
-
-
 def extract_video_id(video_id_or_url):
     # a youtube video id is 11 characters long
     # if the video if is longer than 11 characters, then it's a url
@@ -98,6 +94,9 @@ def join_transcripts(video_url_or_id, target_language):
     
     return insert_punctuation(combined_text)
 
+# Load environment variables from .env file
+load_dotenv()
+
 # Access environment variables
 project_id = os.getenv('PROJECT_ID')
 location = os.getenv('LOCATION')
@@ -169,6 +168,87 @@ def produce_title(youtube_url):
     # Extract the title from the response
     return response['items'][0]['snippet']['title'] if response['items'] else "Video not found."
 
+def clear_directory(directory):
+    """
+    Removes all files from the specified directory.
+    """
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
+
+def text_to_speech(transcript, target_language, gender="NEUTRAL", chunk_size=4500):
+    directory = "mp3"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    else:
+        clear_directory(directory)
+    client = texttospeech.TextToSpeechClient()
+    chunks = []
+    while len(transcript.encode('utf-8')) > chunk_size:
+        part = transcript[:chunk_size]
+        while len(part.encode('utf-8')) > chunk_size:
+            part = part[:-1]
+        chunks.append(part)
+        transcript = transcript[len(part):]
+    if transcript:
+        chunks.append(transcript)
+    for i, chunk in enumerate(chunks):
+        attempt = 0
+        while attempt < 3:  # Retry logic
+            try:
+                synthesis_input = texttospeech.SynthesisInput(text=chunk)
+                output_file = f"{directory}/audio_{i}.mp3"
+                voice = texttospeech.VoiceSelectionParams(
+                    language_code=target_language,
+                    ssml_gender=getattr(texttospeech.SsmlVoiceGender, gender)
+                )
+                audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
+                response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+                
+                with open(output_file, "wb") as out:
+                    out.write(response.audio_content)
+                print(f'Audio content written to file {output_file}')
+                break
+            except (RetryError, ServerError) as e:
+                print(f"Attempt {attempt+1}: Server error occurred, retrying...")
+                time.sleep(2 ** attempt)  # Exponential backoff
+                attempt += 1
+            except Exception as e:
+                print(f"Failed to synthesize speech: {e}")
+                break
+def get_ssml_gender(gender):
+    return {
+        "MALE": texttospeech.SsmlVoiceGender.MALE,
+        "FEMALE": texttospeech.SsmlVoiceGender.FEMALE,
+        "NEUTRAL": texttospeech.SsmlVoiceGender.NEUTRAL
+    }.get(gender, texttospeech.SsmlVoiceGender.NEUTRAL)
+
+def merge_audio_files(output_path, output_filename):
+    """
+    Merge all MP3 files in the 'mp3' directory into a single MP3 file.
+    Args:
+    - output_filename (str): Filename for the merged output file.
+    """
+    directory = "mp3"
+    files = [f for f in os.listdir(directory) if f.endswith('.mp3')]
+    files.sort()  # Sort files to maintain order
+    # Load the first file
+    merged = AudioSegment.from_mp3(os.path.join(directory, files[0]))
+    # Concatenate the rest of the files
+    for file in files[1:]:
+        current_audio = AudioSegment.from_mp3(os.path.join(directory, file))
+        merged += current_audio
+    # Export the result
+    merged.export(os.path.join(output_path, output_filename), format="mp3")
+    print(f'Merged audio has been saved to {os.path.join(output_path, output_filename)}')
+
+
 # if __name__ == "__main__":
 #     # english
 #     # video_url = "https://www.youtube.com/watch?v=oz9cEqFynHU"
@@ -189,3 +269,7 @@ def produce_title(youtube_url):
 
 #     joined_transcripts = join_transcripts(video_url, 'zh-Hans')
 #     print(joined_transcripts)
+
+#     text_to_speech(joined_transcripts, 'zh-Hans', "NEUTRAL")
+#     output_name = 'wow_test'
+#     merge_audio_files('modify', f'{output_name}.mp3')
