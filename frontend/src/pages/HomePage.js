@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, useDisclosure, Spinner, Center, VStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  useDisclosure,
+  Spinner,
+  Center,
+  VStack,
+  Text,
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import CustomHamburgerIcon from "../components/CustomHamburgerIcon";
@@ -51,11 +58,11 @@ export default function HomePage() {
       console.log(response); // For testing in frontend
 
       if (response.status === 200) {
-        const thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
-        const title = "Dynamic Video Title"; // Ideally fetch this dynamically or from the response if your backend provides it
+        const videoUrl = response.data.video_url;
+        const title = response.data.youtube_title; // Ideally fetch this dynamically or from the response if your backend provides it
 
         setVideoDetails({
-          thumbnail,
+          videoUrl,
           title,
           language,
           celebrityVoice: language === "English" ? celebrityVoice : "",
@@ -93,18 +100,25 @@ export default function HomePage() {
         >
           <Box className="justify-center text-center">
             {loading ? (
-              <Center height="100vh"> {/* Adjust height as needed to center vertically in the view */}
-              <VStack spacing={3}> {/* Vertical stack with spacing between items */}
-                <Text fontSize="xl" color="gray.600">Translating...</Text> {/* Text component for the label */}
-                <Spinner
-                  size="xl"
-                  thickness="4px"
-                  speed="0.65s"
-                  emptyColor="gray.200"
-                  color="teal.500"
-                />
-              </VStack>
-            </Center>
+              <Center height="100vh">
+                {" "}
+                {/* Adjust height as needed to center vertically in the view */}
+                <VStack spacing={3}>
+                  {" "}
+                  {/* Vertical stack with spacing between items */}
+                  <Text fontSize="xl" color="gray.600">
+                    Translating...
+                  </Text>{" "}
+                  {/* Text component for the label */}
+                  <Spinner
+                    size="xl"
+                    thickness="4px"
+                    speed="0.65s"
+                    emptyColor="gray.200"
+                    color="teal.500"
+                  />
+                </VStack>
+              </Center>
             ) : videoDetails ? (
               <HomePageVideo
                 videoDetails={videoDetails}

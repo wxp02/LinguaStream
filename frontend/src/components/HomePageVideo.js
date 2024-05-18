@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactPlayer from "react-player";
 import {
   Box,
   Flex,
@@ -11,7 +12,7 @@ import {
   Textarea,
   Input,
   IconButton,
-  Icon
+  Icon,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { TbMessageChatbot } from "react-icons/tb";
@@ -49,12 +50,13 @@ export default function HomePageVideo({ videoDetails, handleReset }) {
   return (
     <Box p={5}>
       <Flex justifyContent="flex-end">
-        <Button 
-          colorScheme="teal" 
-          onClick={handleReset} 
-          size="sm" 
+        <Button
+          colorScheme="teal"
+          onClick={handleReset}
+          size="sm"
           mt={-3}
-          leftIcon={<IoCaretBack />}>
+          leftIcon={<IoCaretBack />}
+        >
           Back
         </Button>
       </Flex>
@@ -64,7 +66,7 @@ export default function HomePageVideo({ videoDetails, handleReset }) {
         gap={4}
       >
         <GridItem colSpan={7}>
-          <VStack spacing={4} align="stretch" >
+          <VStack spacing={4} align="stretch">
             <Image
               src={videoDetails.thumbnail}
               alt="Video Thumbnail"
@@ -85,6 +87,13 @@ export default function HomePageVideo({ videoDetails, handleReset }) {
                   Celebrity Voice: {videoDetails.celebrityVoice}
                 </Text>
               )}
+            <ReactPlayer
+              url={videoDetails.videoUrl}
+              controls={true}
+              playing={true}
+              width="100%"
+              height="100%"
+            />
           </VStack>
         </GridItem>
         <GridItem colSpan={5}>
@@ -106,23 +115,32 @@ export default function HomePageVideo({ videoDetails, handleReset }) {
                   Transcript (auto-generated)
                 </Text>
               </Flex>
-              
+
               <Textarea
                 value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse..."
                 readOnly
                 height="100%"
-                resize={'none'}
+                resize={"none"}
               />
             </VStack>
-            
-            <VStack spacing={4} flex="1" bg="gray.100" p={4} borderRadius="md" mt={3}>
-            <Flex alignItems="center" >
-              <Icon as={TbMessageChatbot} w={8} h={8} color="gray.700" />
-              <Text fontSize="lg" color="gray.700" ml={2}>  {/* Add some left margin to create space between the icon and text */}
-                Chatbot
-              </Text>
-            </Flex>
-              
+
+            <VStack
+              spacing={4}
+              flex="1"
+              bg="gray.100"
+              p={4}
+              borderRadius="md"
+              mt={3}
+            >
+              <Flex alignItems="center">
+                <Icon as={TbMessageChatbot} w={8} h={8} color="gray.700" />
+                <Text fontSize="lg" color="gray.700" ml={2}>
+                  {" "}
+                  {/* Add some left margin to create space between the icon and text */}
+                  Chatbot
+                </Text>
+              </Flex>
+
               <Box
                 bg="white"
                 p={3}
