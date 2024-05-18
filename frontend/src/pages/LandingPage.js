@@ -6,7 +6,7 @@ export default function LandingPage() {
   let navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate("/home");
+    navigate("/signup");
   };
 
   return (
