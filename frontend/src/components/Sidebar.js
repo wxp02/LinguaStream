@@ -74,7 +74,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 >
                 <Flex alignItems="center"> 
                   <ListIcon as={MdExitToApp} color="gray.500" />
-                  <Text fontWeight="normal">Logout</Text>
+                  <Text fontWeight="normal" ml="2">Logout</Text>
                 </Flex>
                 </motion.div>
                 
@@ -86,15 +86,15 @@ export default function Sidebar({ isOpen, onClose }) {
           initial="hidden"
           animate="visible"
           variants={variants}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{  duration: 0.5 }}
         >
         <Box 
           position="absolute" 
           bottom="0" 
           left="0" 
           right="0" p="5" 
-          bgGradient="linear(to-l, blue.500, blue.800)" 
-          borderRadius="md"
+          bgGradient="linear(to-t, green.400, green.50)" 
+          
           boxShadow="xl" 
           >
           <Flex alignItems="center" justifyContent="flex-start">

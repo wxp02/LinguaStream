@@ -95,7 +95,7 @@ export default function HomePage() {
             {loading ? (
               <Center height="100vh"> {/* Adjust height as needed to center vertically in the view */}
               <VStack spacing={3}> {/* Vertical stack with spacing between items */}
-                <Text fontSize="xl" color="gray.200">Translating...</Text> {/* Text component for the label */}
+                <Text fontSize="xl" color="gray.600">Translating...</Text> {/* Text component for the label */}
                 <Spinner
                   size="xl"
                   thickness="4px"
